@@ -32,7 +32,11 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
+          bun-version: 1.4.4
+
+      - name: Verify fixed stable Bun runtime
+        run: >-
+          bun -e 'if (Bun.version !== "1.4.4" || Bun.revision !== "38afee6c84fcf48c0edb2466aa4b27d287a59c30") throw new Error("Install the pinned stable Bun release")'
 
       - name: Install dependencies
         run: bun install
